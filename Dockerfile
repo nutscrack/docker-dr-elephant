@@ -12,7 +12,7 @@ RUN yum install -y wget git unzip zip which \
 
 # jdk
 RUN cd /tmp \
- && wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm \
+ && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" "https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.rpm" \
  && rpm -ivh jdk-*-linux-x64.rpm \
  && rm jdk-*-linux-x64.rpm
 ENV JAVA_HOME /usr/java/default
@@ -59,7 +59,7 @@ ENV ELEPHANT_CONF_DIR ${ELEPHANT_CONF_DIR:-/usr/dr-elephant/app-conf}
 ENV SPARK_VERSION ${SPARK_VERSION:-1.6.0}
 
 #ARG HADOOP_VERSION
-ENV HADOOP_VERSION ${HADOOP_VERSION:-2.7.4}
+ENV HADOOP_VERSION ${HADOOP_VERSION:-2.6.0-cdh5.13.0}
 
 #ARG HADOOP_HOME
 ENV HADOOP_HOME ${HADOOP_HOME:-/usr/share/hadoop}
@@ -70,7 +70,7 @@ ENV HADOOP_CONF_DIR ${HADOOP_CONF_DIR:-/etc/hadoop/conf}
 ## SETUP HADOOP CLIENT ##
 
 RUN cd /tmp \
- && wget http://apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz \
+ && wget https://archive.cloudera.com/cdh5/cdh/5/hadoop-$HADOOP_VERSION.tar.gz \
  && mkdir -p $HADOOP_CONF_DIR \
  && mkdir -p $HADOOP_HOME \
  && tar xzf hadoop-$HADOOP_VERSION.tar.gz \
